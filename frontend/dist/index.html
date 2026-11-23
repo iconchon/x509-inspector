@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X.509 Inspector</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <div class="brand"><span class="logo">⛨</span> X.509 Inspector</div>
+  <div class="actions">
+    <button id="btnOpen" class="primary" title="Buka file (Ctrl+O)">Buka file</button>
+    <button id="btnPaste" title="Tempel PEM / Base64 / hex">Tempel teks</button>
+    <button id="btnOnline" title="Unduh CRL, OCSP, dan sertifikat issuer (AIA)">Cek online</button>
+    <div class="menu">
+      <button id="btnExport">Ekspor ▾</button>
+      <div class="menu-list" id="exportMenu">
+        <button data-fmt="txt">Laporan teks (.txt)</button>
+        <button data-fmt="json">Laporan JSON (.json)</button>
+      </div>
+    </div>
+    <button id="btnClear" class="ghost" title="Hapus semua file">Bersihkan</button>
+    <button id="btnOpts" class="ghost" title="Opsi validasi">Opsi</button>
+  </div>
+  <div class="counts" id="counts"></div>
+</header>
+
+<section class="opts hidden" id="opts">
+  <label>Hostname <input id="optHost" placeholder="contoh: www.domain.go.id" spellcheck="false"></label>
+  <label>Waktu validasi <input id="optAt" type="datetime-local" step="1"></label>
+  <label>Profil
+    <select id="optProfile">
+      <option value="auto">Otomatis</option>
+      <option value="generic">Umum (RFC 5280)</option>
+      <option value="icao">ICAO 9303 (eMRTD)</option>
+      <option value="tls">TLS / Web</option>
+    </select>
+  </label>
+  <label>Peringatan kedaluwarsa <input id="optExp" type="number" min="1" max="3650" value="30" style="width:70px"> hari</label>
+  <label class="chk"><input id="optTrust" type="checkbox" checked> Cek trust store OS</label>
+  <button id="btnApply" class="primary small">Terapkan</button>
+  <button id="btnNow" class="ghost small">Waktu = sekarang</button>
+</section>
+
+<main>
+  <aside id="side">
+    <div class="side-empty" id="sideEmpty">Belum ada file.</div>
+    <div id="fileList"></div>
+  </aside>
+  <section id="detail">
+    <div class="drop" id="drop">
+      <div class="drop-inner">
+        <div class="drop-icon">⇩</div>
+        <h2>Seret file ke sini</h2>
+        <p>atau <a href="#" id="linkOpen">pilih file</a> · <a href="#" id="linkPaste">tempel teks</a></p>
+        <p class="muted">PEM · DER/CER/CRT · CRL · CSR · kunci privat/publik · PKCS#7 (P7B) · PKCS#12 (PFX/P12)<br>
+        ICAO CSCA Master List (.ml) · EF.SOD · Base64 / hex</p>
+        <p class="muted small">Semua pemeriksaan berjalan lokal. Jaringan hanya dipakai bila Anda menekan "Cek online".</p>
+      </div>
+    </div>
+    <div id="view" class="hidden"></div>
+  </section>
+</main>
+
+<div class="status" id="status"></div>
+
+<dialog id="pasteDlg">
+  <form method="dialog">
+    <h3>Tempel sertifikat / CRL / CSR / kunci</h3>
+    <textarea id="pasteText" spellcheck="false" placeholder="-----BEGIN CERTIFICATE-----&#10;...&#10;-----END CERTIFICATE-----"></textarea>
+    <div class="dlg-actions">
+      <button value="cancel" class="ghost">Batal</button>
+      <button value="ok" class="primary" id="pasteOk">Periksa</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

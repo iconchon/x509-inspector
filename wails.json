@@ -1,0 +1,16 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "x509-inspector",
+  "outputfilename": "x509-inspector",
+  "frontend:dir": "frontend",
+  "frontend:install": "",
+  "frontend:build": "",
+  "wailsjsdir": "",
+  "info": {
+    "companyName": "X.509 Inspector",
+    "productName": "X.509 Inspector",
+    "productVersion": "1.0.0",
+    "copyright": "",
+    "comments": "Pemeriksa file sertifikat X.509"
+  }
+}

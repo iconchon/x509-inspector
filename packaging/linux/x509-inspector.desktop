@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=X.509 Inspector
+Comment=Pemeriksa file sertifikat X.509, CRL, CSR, PKCS#7/#12, ICAO Master List
+Exec=x509-inspector %F
+Icon=security-high
+Terminal=false
+Categories=Utility;Security;
+MimeType=application/x-x509-ca-cert;application/pkix-cert;application/pkix-crl;application/pkcs10;application/pkcs7-mime;application/x-pkcs12;application/x-pem-file;
